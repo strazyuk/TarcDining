@@ -85,23 +85,23 @@
                 $totalCost = 0;
                 if (mysqli_num_rows($result) > 0){
                     while ($row = mysqli_fetch_assoc($result)){
-                        $productid = $row['f_id']; 
-                        $query_product = "SELECT * FROM curMenu WHERE f_id = '$productid'";
+                        $itemID = $row['f_id']; 
+                        $query_product = "SELECT * FROM curMenu WHERE f_id = '$itemID'";
                         $result_product = mysqli_query($conn, $query_product);
                         $row_product = mysqli_fetch_assoc($result_product);
 
                         $productname = $row_product['name']; 
-                        $productprice = $row_product['price']; 
+                        $tokenCost = $row_product['token']; 
                         $productquantity = 1; 
 
-                        $totalCost += $productprice;
+                        $totalCost += $tokenCost;
 
                         ?>
                             <tr>
                               <td><?php echo $productname; ?></td>
-                              <td><?php echo $productprice; ?>$</td>
+                              <td><?php echo $tokenCost; ?>$</td>
                               <td class="uppercase"><?php echo $productquantity; ?></td>
-                              <td onclick="handleForm('<?php echo $useremail; ?>','<?php echo $productid; ?>')"><i class='fa-solid fa-trash hover:text-red-500 cursor-pointer'></i></td>
+                              <td onclick="handleForm('<?php echo $useremail; ?>','<?php echo $itemID; ?>')"><i class='fa-solid fa-trash hover:text-red-500 cursor-pointer'></i></td>
                             </tr>
                   <?php
                         }
@@ -115,12 +115,12 @@
         <div class="hidden">
             <form action="handleRemoveCart.php" method="post" id="addForm">
                 <input type="text" name="useremail">
-                <input type="text" name="productid">
+                <input type="text" name="itemID">
             </form>
         </div>
         <script>
-            function handleForm(useremail, productid) {
-            document.getElementById('addForm').elements['productid'].value = productid;
+            function handleForm(useremail, itemID) {
+            document.getElementById('addForm').elements['itemID'].value = itemID;
             document.getElementById('addForm').elements['useremail'].value = useremail;
             document.getElementById('addForm').submit();
             }

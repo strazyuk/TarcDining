@@ -32,7 +32,7 @@
         <div class="flex items-center">
           <div class="flex items-center hover:text-redSecondary">
             <i class="fa-solid fa-house fa-rotate-by mr-2"></i>
-            <a href="customerHome.php" class="text-xl font-semibold uppercase">Home</a>
+            <a href="studentHome.php" class="text-xl font-semibold uppercase">Home</a>
           </div>
           <div class="flex items-center ml-5 hover:text-redSecondary">
             <i class="fa-solid fa-list mr-2"></i>
@@ -79,7 +79,7 @@
               <?php
                 require_once('DBconnect.php');
                 $useremail = $_COOKIE['email'];
-                $query = "SELECT * FROM curMenu where status='pending'";
+                $query = "SELECT * FROM curMenu where status='published'";
                 $result = mysqli_query($conn, $query);
                 if (mysqli_num_rows($result) > 0) {
                   while ($row = mysqli_fetch_assoc($result)) {
@@ -92,14 +92,7 @@
                 ?>
                 <div class='w-full h-60 rounded-lg relative' style='background-image: linear-gradient(to top,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),url(<?php echo $productImage?>); background-size: cover; background-repeat: no-repeat;'>
                   <div class='absolute top-4 right-6'>
-                    <div class="dropdown dropdown-end">
-                      <div tabindex="0" role="button" class="m-1"><i class='fa-solid fa-cart-plus text-4xl text-white hover:text-[#FFBF00] hover pointer'></i></div>
-                      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li onclick="handleForm('<?php echo $productName ?>', '<?php echo $productPrice ?>','<?php echo $useremail ?>','<?php echo $productid ?>','<?php echo $productAmmount[1] ?>')"><a><?php echo $productAmmount[1] . ' ' . $ammountType?></a></li>
-                        <li onclick="handleForm('<?php echo $productName ?>', '<?php echo $productPrice ?>','<?php echo $useremail ?>','<?php echo $productid ?>','<?php echo $productAmmount[2] ?>')"><a><?php echo $productAmmount[2] . ' ' . $ammountType?></a></li>
-                        <li onclick="handleForm('<?php echo $productName ?>', '<?php echo $productPrice ?>','<?php echo $useremail ?>','<?php echo $productid ?>','<?php echo $productAmmount[3] ?>')"><a><?php echo $productAmmount[3] . ' ' . $ammountType?></a></li>
-                      </ul>
-                    </div>
+                    
                   </div>
                   <div class='flex flex-col justify-start absolute bottom-4 left-6'>
                     <h1 class='text-3xl font-bold text-white'><?php echo $productName?></h1>
@@ -121,16 +114,14 @@
                     <input type="number" name="productprice">
                     <input type="text" name="useremail">
                     <input type="text" name="productid">
-                    <input type="number" name="productamount">
                   </form>
                 </div>
                 <script>
-                  function handleForm(productName, productPrice, useremail, productid, productAmmount) {
+                  function handleForm(productName, productPrice, useremail, productid, ) {
                     document.getElementById('addForm').elements['productname'].value = productName;
                     document.getElementById('addForm').elements['productprice'].value = productPrice;
                     document.getElementById('addForm').elements['useremail'].value = useremail;
                     document.getElementById('addForm').elements['productid'].value = productid;
-                    document.getElementById('addForm').elements['productamount'].value = productAmmount;
                     document.getElementById('addForm').submit();
                   }
                 </script>

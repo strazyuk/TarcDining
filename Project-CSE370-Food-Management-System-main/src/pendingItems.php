@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--changed-->
-    <title>CurrentItems</title>
+    <title>pending</title>
     <!-- design plugs -->
     <script src="https://kit.fontawesome.com/5f28ebb90a.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
@@ -28,11 +27,11 @@
       <nav class="h-24 px-40 flex justify-between items-center">
         <div class="flex items-center">
           <img class="h-16 w-16" src="../ICON/logo.png" alt="">
-          <h1 class="text-3xl font-bold ml-3"></h1>
+          <h1 class="text-3xl font-bold ml-3">TarcDining</h1>
         </div>  
         <?php
-            if(isset($_COOKIE['username'])) {
-                $username = $_COOKIE['username'];
+            if(isset($_COOKIE['userID'])) {
+                $username = $_COOKIE['name'];
             } else {
                 echo "No username cookie set";
             }
@@ -63,7 +62,7 @@
           </div>
           <div class="col-span-5 bg-white rounded-tl-3xl h-screen pl-12 pt-12">
             <div>
-              <h1 class="text-4xl font-bold uppercase text-center mb-8">Current published Items</h1>
+              <h1 class="text-4xl font-bold uppercase text-center mb-8">Current pending Items</h1>
             </div>
             <div class='overflow-x-auto'>
               <table class='table'>
@@ -71,27 +70,33 @@
                       <tr>
                           <th class="uppercase">Food Name</th>
                         <!--  <th class="uppercase">Product Price</th>-->
-                        <!--  <th class="uppercase">sellername</th>-->
-                          <th class="uppercase">Total sold</th>
+                        <!--  <th class="uppercase">sellername</th> -->
+                          <th class="uppercase">total sold</th>
+                          <th class="uppercase">status</th>
+                          <th class="uppercase">Action</th>
                       </tr>
                   </thead>
                   <tbody>
                   <?php 
                     require_once('DBconnect.php');
                     $useremail = $_COOKIE['email'];
-                    $query = "SELECT * FROM curMenu where status = 'published'";
+                    $query = "SELECT * FROM curMenu where status = 'pending'";
                     $result = mysqli_query($conn, $query);
                     $totalCost = 0;
                     if (mysqli_num_rows($result) > 0){
                         while ($row = mysqli_fetch_assoc($result)){
+                            $itemID = $row['f_id'];
                             $itemName = $row['name'];
                             $itemToken = $row['token'];
                             $itemSellCount = $row['sellCount'];
+                            $itemStatus = $row['status'];
                             ?>
                               <tr>
                                 <td><?php echo $itemName ?></td>
-                                <td><?php echo $itemToken ?></td>
                                 <td><?php echo $itemSellCount ?></td>
+                                <td><?php echo $itemSellCount ?></td>
+                                <td><?php echo $itemStatus ?></td>
+                                <td><button onclick="handleStatus('<?php echo $itemID ?>','<?php echo $itemStatus ?>','reject')">reject</button>||<button onclick="handleStatus('<?php echo $itemID ?>','<?php echo $itemStatus ?>','approve')">approve</button></td>
                               </tr>
                     <?php
                           }
@@ -99,6 +104,21 @@
                   </tbody>
               </table>
             </div>
+            <div class="hidden">
+              <form action="handleStatusPending.php" id='statusForm' method="post">
+                <input type="text" name="action">
+                <input type="text" name="itemID">
+                <input type="text" name="itemStatus">
+              </form>
+            </div>
+            <script>
+              function handleStatus(itemID, itemStatus, action){
+                document.getElementById('statusForm').elements['action'].value = action;
+                document.getElementById('statusForm').elements['itemID'].value = itemID;
+                document.getElementById('statusForm').elements['itemStatus'].value = itemStatus;
+                document.getElementById('statusForm').submit();
+              }
+            </script>
           </div>
         </div>
       </section>

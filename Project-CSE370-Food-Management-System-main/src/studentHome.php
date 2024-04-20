@@ -80,7 +80,7 @@
               while ($row = mysqli_fetch_array($result)) {
             ?>
               <swiper-slide>
-                <div class='w-72 h-96 rounded-lg relative' style='background-image: linear-gradient(to top,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),url(<?php echo $row['imgurl']; ?>); background-size: cover; background-repeat: no-repeat;'>
+                <div class='w-72 h-96 rounded-lg relative' style='background-image: linear-gradient(to top,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),url(<?php echo $row['img']; ?>); background-size: cover; background-repeat: no-repeat; onclick="handle('addForm<?php echo $productid; ?>');">
                   <div class='absolute top-4 right-6'>
                     <i class='fa-solid fa-cart-plus text-4xl text-white hover:text-[#FFBF00] hover pointer'></i>
                   </div>
@@ -116,7 +116,7 @@
               while ($row = mysqli_fetch_array($result)) {
             ?>
               <swiper-slide>
-                <div class='w-72 h-96 rounded-lg relative' style='background-image: linear-gradient(to top,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),url(<?php echo $row['imgurl']; ?>); background-size: cover; background-repeat: no-repeat;'>
+                <div class='w-72 h-96 rounded-lg relative' style='background-image: linear-gradient(to top,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),url(<?php echo $row['img']; ?>); background-size: cover; background-repeat: no-repeat; on-click: c'>
                   <div class='absolute top-4 right-6'>
                     <i class='fa-solid fa-cart-plus text-4xl text-white hover:text-[#FFBF00] hover pointer'></i>
                   </div>
