@@ -54,11 +54,17 @@ CREATE TABLE IF NOT EXISTS `student` (
 
 -- Create feedback table
 CREATE TABLE IF NOT EXISTS `feedback` (
-  `s_id` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(45) NOT NULL,
   `text` VARCHAR(45) NULL,
   `mealRating` VARCHAR(45) NULL,
-  PRIMARY KEY (`s_id`)
+  PRIMARY KEY (`email`, `text`),  -- Composite key using email and text
+  CONSTRAINT `fk_feedback_student`
+    FOREIGN KEY (`email`)
+    REFERENCES `student` (`email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 );
+
 
 -- Create curMenu table
 CREATE TABLE IF NOT EXISTS `curMenu` (

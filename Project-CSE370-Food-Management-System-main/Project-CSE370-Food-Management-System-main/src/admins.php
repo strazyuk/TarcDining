@@ -20,23 +20,6 @@
           }
         }
       }
-
-      function deleteUser(email) {
-        // Confirm before deleting
-        if (confirm("Are you sure you want to delete this user?")) {
-          // AJAX request to delete user
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", "delete_user.php", true);
-          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-          xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-              // Reload the page after deletion
-              window.location.reload();
-            }
-          };
-          xhr.send("email=" + email);
-        }
-      }
     </script>
 </head>
 <body class="bg-yellowPrimary">
@@ -73,11 +56,15 @@
               </div>
               <div class="flex items-center hover:text-redSecondary">
                 <i class="fa-solid fa-plus mr-2"></i>
-                <a href='addItems.php' class="text-lg font-semibold uppercase">Add </a>
+                <a href='addProducts.php' class="text-lg font-semibold uppercase">Add </a>
               </div>
               <div class="flex items-center hover:text-redSecondary">
                 <i class="fa-solid fa-plus mr-2"></i>
                 <a href='admin_create_account.php' class="text-lg font-semibold uppercase">Create Account</a>
+              </div>
+              <div class="flex items-center hover:text-redSecondary">
+                <i class="fa-solid fa-plus mr-2"></i>
+                <a href='admin_feedback.php' class="text-lg font-semibold uppercase">Feedback</a>
               </div>
             </div>
           </div>
@@ -93,32 +80,42 @@
             $resultUser = mysqli_query($conn, $queryUser);
 
             echo "<div class='col-span-5 bg-white rounded-tl-3xl h-screen pl-12 pt-12 overflow-auto'>";
-
+            echo "<div class='col-span-5 bg-white rounded-tl-3xl h-screen pl-12 pt-12 overflow-auto'>";
+            echo "<div class='grid grid-cols-2 gap-8'>";
+            echo "<div>";
+            echo "<h2 class='text-2xl font-semibold mb-4'>Admins</h2>";
             if (mysqli_num_rows($resultAdmin) > 0) {
               echo "<table>";
-              echo "<tr><th>Admin Email</th><th>&nbsp;</th><th>Admin name</th></tr>";
+              echo "<tr><th>Email</th><th>Name</th></tr>";
               while ($row = mysqli_fetch_assoc($resultAdmin)) {
                 echo "<tr>";
                 echo "<td>" . $row['email'] . "</td>";
-                echo "<td>&nbsp;</td>";
                 echo "<td>" . $row['username'] . "</td>";
                 echo "</tr>";
               }
+              echo "</table>";
+            } else {
+              echo "No admins found.";
             }
-
-            // Display non-admin users with delete button
+            echo "</div>";
+            echo "<div>";
+            echo "<h2 class='text-2xl font-semibold mb-4'>Users</h2>";
             if (mysqli_num_rows($resultUser) > 0) {
               echo "<table>";
-              echo "<tr><th>User Email</th><th>&nbsp;</th><th>Username</th><th>&nbsp;</th></tr>";
+              echo "<tr><th>Email</th><th>Name</th></tr>";
               while ($row = mysqli_fetch_assoc($resultUser)) {
                 echo "<tr>";
                 echo "<td>" . $row['email'] . "</td>";
-                echo "<td>&nbsp;</td>";
                 echo "<td>" . $row['username'] . "</td>";
-                echo "<td><button onclick='deleteUser(\"" . $row['email'] . "\")'>Delete</button></td>";
                 echo "</tr>";
               }
+              echo "</table>";
+            } else {
+              echo "No users found.";
             }
+            echo "</div>";
+            echo "</div>";
+            echo "</div>";
 
             echo "</table>";
             echo "</div>";

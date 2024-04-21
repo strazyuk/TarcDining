@@ -78,9 +78,15 @@
             $result = mysqli_query($conn, $query);
             if (mysqli_num_rows($result) > 0) {
               while ($row = mysqli_fetch_array($result)) {
+                $itemName = $row['name'];
+                $itemPrice = $row['token'];
+                $itemImage = $row['img'];
+                $itemType = $row['type'];
+                $itemID = $row['f_id'];
             ?>
-              <swiper-slide>
-              <div class='w-72 h-96 rounded-lg relative' style='background-image: linear-gradient(to top,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),url(<?php echo $row['img']; ?>); background-size: cover; background-repeat: no-repeat;'>
+              <swiper-slide onclick="handleForm('<?php $itemName; ?>','<?php echo $row['token']; ?>','<?php echo $useremail ?>','<?php echo $row['f_id']; ?>',)"> <!-- onclick -->
+              
+                <div class='w-72 h-96 rounded-lg relative' style='background-image: linear-gradient(to top,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),url(<?php echo $row['img']; ?>); background-size: cover; background-repeat: no-repeat;'>
                   <div class='absolute top-4 right-6'>
                     <i class='fa-solid fa-cart-plus text-4xl text-white hover:text-[#FFBF00] hover pointer'></i>
                   </div>
@@ -115,8 +121,9 @@
               
               while ($row = mysqli_fetch_array($result)) {
             ?>
-              <swiper-slide>
-                <div class='w-72 h-96 rounded-lg relative' style='background-image: linear-gradient(to top,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),url(<?php echo $row['img']; ?>); background-size: cover; background-repeat: no-repeat; on-click: c'>
+              
+              <swiper-slide onclick="handleForm('<?php echo $row['name']; ?>','<?php echo $row['token']; ?>','<?php echo $useremail ?>','<?php echo $row['f_id']; ?>',)"> <!-- onclick -->
+                <div class='w-72 h-96 rounded-lg relative' style='background-image: linear-gradient(to top,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),url(<?php echo $row['img']; ?>); background-size: cover; background-repeat: no-repeat;'><!-- onclick -->
                   <div class='absolute top-4 right-6'>
                     <i class='fa-solid fa-cart-plus text-4xl text-white hover:text-[#FFBF00] hover pointer'></i>
                   </div>
@@ -138,6 +145,24 @@
             ?>
             </swiper-container>
           <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+          <div class="hidden">
+            <form action="handleCart.php" method="post" id="addForm">
+              <input type="text" name="itemName">
+              <input type="number" name="itemPrice">
+              <input type="text" name="useremail">
+              <input type="text" name="itemID">
+            </form>
+          </div>
+          <script>
+            function handleForm(itemName, itemPrice, useremail, itemID) {
+              console.log(itemName, itemPrice, useremail, itemID); // this line will show the only if you click on image
+              document.getElementById('addForm').elements['itemName'].value = itemName;
+              document.getElementById('addForm').elements['itemPrice'].value = itemPrice;
+              document.getElementById('addForm').elements['useremail'].value = useremail;
+              document.getElementById('addForm').elements['itemID'].value = itemID;
+              document.getElementById('addForm').submit();
+            }
+          </script>
         </div>
       </section>
     </main>

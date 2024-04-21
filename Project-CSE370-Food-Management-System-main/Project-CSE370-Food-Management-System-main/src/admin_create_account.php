@@ -56,15 +56,15 @@
               </div>
               <div class="flex items-center hover:text-redSecondary">
                 <i class="fa-solid fa-plus mr-2"></i>
-                <a href='addItems.php' class="text-lg font-semibold uppercase">Add </a>
+                <a href='addProducts.php' class="text-lg font-semibold uppercase">Add </a>
               </div>
               <div class="flex items-center hover:text-redSecondary">
                 <i class="fa-solid fa-plus mr-2"></i>
-                <a href='admin_create_account.php' class="text-lg font-semibold uppercase">Create Account</a>
+                <a href='admins.php' class="text-lg font-semibold uppercase">Users</a>
               </div>
               <div class="flex items-center hover:text-redSecondary">
                 <i class="fa-solid fa-plus mr-2"></i>
-                <a href='admins.php' class="text-lg font-semibold uppercase">ALl User</a>
+                <a href='admin_feedback.php' class="text-lg font-semibold uppercase">Feedback</a>
               </div>
             </div>
           </div>

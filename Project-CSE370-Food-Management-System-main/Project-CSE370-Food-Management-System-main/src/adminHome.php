@@ -56,7 +56,7 @@
               </div>
               <div class="flex items-center hover:text-redSecondary">
                 <i class="fa-solid fa-plus mr-2"></i>
-                <a href='addItems.php' class="text-lg font-semibold uppercase">Add </a>
+                <a href='addProducts.php' class="text-lg font-semibold uppercase">Add </a>
               </div>
               <div class="flex items-center hover:text-redSecondary">
                 <i class="fa-solid fa-plus mr-2"></i>
@@ -66,6 +66,10 @@
                 <i class="fa-solid fa-plus mr-2"></i>
                 <a href='admins.php' class="text-lg font-semibold uppercase">Users</a>
               </div>
+              <div class="flex items-center hover:text-redSecondary">
+                <i class="fa-solid fa-plus mr-2"></i>
+                <a href='admin_feedback.php' class="text-lg font-semibold uppercase">Feedback</a>
+              </div>
             </div>
           </div>
           <?php
@@ -74,20 +78,21 @@
             $result = mysqli_query($conn, $query);
             $row = mysqli_fetch_assoc($result);
             $student_count = $row['student_count'];
-            // $query = "SELECT COUNT(*) AS seller_count FROM users WHERE role = 'seller'";
-            // $result = mysqli_query($conn, $query);
-            // $row = mysqli_fetch_assoc($result);
-            // $seller_count = $row['seller_count'];
-            // // change the code below after updating the disjoint table;
+            
             $query = "SELECT SUM(revenue) AS total_salary FROM admin";
             $result = mysqli_query($conn, $query);
             $row = mysqli_fetch_assoc($result);
             $total_salary = $row['total_salary'];
+            $query="SELECT SUM(sellCount) as total_sales from curMenu";
+            $result = mysqli_query($conn, $query);
+            $row = mysqli_fetch_assoc($result);
+
+            $total_sales= $row['total_sales']
           ?>
           <div class="col-span-5 bg-white rounded-tl-3xl h-screen pl-12 pt-12">
             <div>
               <h1>Total revenue <?php echo $total_salary ?></h1>
-              <h1>Current revenue of admins <?php echo $total_salary ?></h1>
+              <h1>Total sales made  <?php echo $total_sales ?></h1>
               <h1>total student <?php echo $student_count ?></h1>
             </div>
           </div>

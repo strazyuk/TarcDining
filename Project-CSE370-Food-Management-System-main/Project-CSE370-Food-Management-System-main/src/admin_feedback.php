@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--changed-->
-    <title>CurrentItems</title>
+    <title>Home</title>
     <!-- design plugs -->
     <script src="https://kit.fontawesome.com/5f28ebb90a.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
@@ -28,7 +27,7 @@
       <nav class="h-24 px-40 flex justify-between items-center">
         <div class="flex items-center">
           <img class="h-16 w-16" src="../ICON/logo.png" alt="">
-          <h1 class="text-3xl font-bold ml-3"></h1>
+          <h1 class="text-3xl font-bold ml-3">TarcDining</h1>
         </div>  
         <?php
             if(isset($_COOKIE['username'])) {
@@ -56,49 +55,53 @@
                 <a href="publishedItems.php" class="text-lg font-semibold uppercase">Published Items</a>
               </div>
               <div class="flex items-center hover:text-redSecondary">
-                <i class="fa-solid fa-hourglass-end mr-2"></i>
-                <a href='pendingItems.php' class="text-lg font-semibold uppercase">Pending Items</a>
+                <i class="fa-solid fa-plus mr-2"></i>
+                <a href='addProducts.php' class="text-lg font-semibold uppercase">Add </a>
               </div>
+              <div class="flex items-center hover:text-redSecondary">
+                <i class="fa-solid fa-plus mr-2"></i>
+                <a href='admin_create_account.php' class="text-lg font-semibold uppercase">Create Account</a>
+              </div>
+              <div class="flex items-center hover:text-redSecondary">
+                <i class="fa-solid fa-plus mr-2"></i>
+                <a href='admins.php' class="text-lg font-semibold uppercase">Users</a>
+              </div>
+
             </div>
           </div>
-          <div class="col-span-5 bg-white rounded-tl-3xl h-screen pl-12 pt-12">
-            <div>
-              <h1 class="text-4xl font-bold uppercase text-center mb-8">Current published Items</h1>
-            </div>
-            <div class='overflow-x-auto'>
-              <table class='table'>
-                  <thead>
-                      <tr>
-                          <th class="uppercase">Food Name</th>
-                        <!--  <th class="uppercase">Product Price</th>-->
-                        <!--  <th class="uppercase">sellername</th>-->
-                          <th class="uppercase">Total sold</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  <?php 
-                    require_once('DBconnect.php');
-                    $useremail = $_COOKIE['email'];
-                    $query = "SELECT * FROM curMenu where status = 'published'";
-                    $result = mysqli_query($conn, $query);
-                    $totalCost = 0;
-                    if (mysqli_num_rows($result) > 0){
-                        while ($row = mysqli_fetch_assoc($result)){
-                            $itemName = $row['name'];
-                            $itemToken = $row['token'];
-                            $itemSellCount = $row['sellCount'];
-                            ?>
-                              <tr>
-                                <td><?php echo $itemName ?></td>
-                                <td><?php echo $itemSellCount ?></td>
-                              </tr>
-                    <?php
-                          }
-                    }?>
-                  </tbody>
-              </table>
-            </div>
-          </div>
+          <?php
+            require_once('DBconnect.php');
+
+            // Fetch student feedback and ratings
+            $query = "SELECT * FROM feedback";
+            $result = mysqli_query($conn, $query);
+
+            // Display student feedback and ratings in a table
+            echo "<div class='col-span-5 bg-white rounded-tl-3xl h-screen pl-12 pt-12'>";
+            echo "<h2 class='text-2xl font-semibold mb-4'>Student Feedback and Ratings:</h2>";
+            echo "<table class='w-full'>";
+            echo "<thead>";
+            echo "<tr>";
+            echo "<th class='py-2 px-4 bg-gray-200 border-b-2 border-gray-300'>Email</th>";
+            echo "<th class='py-2 px-4 bg-gray-200 border-b-2 border-gray-300'>Feedback</th>";
+            echo "<th class='py-2 px-4 bg-gray-200 border-b-2 border-gray-300'>Meal Rating</th>";
+            echo "</tr>";
+            echo "</thead>";
+            echo "<tbody>";
+            while ($row = mysqli_fetch_assoc($result)) {
+              echo "<tr>";
+              echo "<td class='py-2 px-4 border-b border-gray-300'>" . $row['email'] . "</td>";
+              echo "<td class='py-2 px-4 border-b border-gray-300'>" . $row['text'] . "</td>";
+              echo "<td class='py-2 px-4 border-b border-gray-300'>" . $row['mealRating'] . "</td>";
+              echo "</tr>";
+            }
+            echo "</tbody>";
+            echo "</table>";
+            echo "</div>";
+
+            // Close database connection
+            mysqli_close($conn);
+          ?>
         </div>
       </section>
     </main>

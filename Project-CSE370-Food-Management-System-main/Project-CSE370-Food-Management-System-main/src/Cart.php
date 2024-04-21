@@ -37,13 +37,8 @@
           </div>
           <div class="flex items-center ml-5 hover:text-redSecondary">
             <i class="fa-solid fa-list mr-2"></i>
-            <a href="allItems.php" class="text-xl font-semibold uppercase">Items</a>
-          </div>
-          <div class='flex items-center ml-5 hover:text-redSecondary'>
-                             <!--changed-->
-            <i class="fa-solid fa-list-check mr-2"></i>
-            <a href='Cart.php' class='text-xl font-semibold uppercase'>Add</a>
-          </div>
+            <a href="menu.php" class="text-xl font-semibold uppercase">Menu</a>
+    </div>
         <div>
           <?php
             if(isset($_COOKIE['username'])) {
@@ -71,7 +66,7 @@
                   <tr>
                     <!--changed-->
                       <th>Food Name</th>
-                      <th>Food Price</th>
+                      <th>Food Token</th>
                       <th>Quantity</th>
                       <th></th>
                   </tr>
@@ -110,7 +105,7 @@
             </table>
         </div>
         <div class="my-20">
-            <h1 class="text-2xl font-semibold">Total Cost: $<?php echo $totalCost; ?></h1>
+            <h1 class="text-2xl font-semibold">Total Token: <?php echo $totalCost; ?></h1>
         </div>
         <div class="hidden">
             <form action="handleRemoveCart.php" method="post" id="addForm">

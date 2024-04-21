@@ -32,7 +32,7 @@
         <div class="flex items-center">
           <div class="flex items-center hover:text-redSecondary">
             <i class="fa-solid fa-house fa-rotate-by mr-2"></i>
-            <a href="studentHome.php" class="text-xl font-semibold uppercase">Home</a>
+            <a href="customerHome.php" class="text-xl font-semibold uppercase">Home</a>
           </div>
           <div class="flex items-center ml-5 hover:text-redSecondary">
             <i class="fa-solid fa-list mr-2"></i>
@@ -83,22 +83,22 @@
                 $result = mysqli_query($conn, $query);
                 if (mysqli_num_rows($result) > 0) {
                   while ($row = mysqli_fetch_assoc($result)) {
-                    $productName = $row['name'];
-                    $productPrice = $row['token'];
-                    $productImage = $row['img'];
-                    $productcategory = $row['type'];
-                    $productid = $row['f_id'];
+                    $itemName = $row['name'];
+                    $itemPrice = $row['token'];
+                    $itemImage = $row['img'];
+                    $itemType = $row['type'];
+                    $itemID = $row['f_id'];
                     // k
                 ?>
-                <div class='w-full h-60 rounded-lg relative' style='background-image: linear-gradient(to top,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),url(<?php echo $productImage?>); background-size: cover; background-repeat: no-repeat;'>
+                <div onclick="handleForm('<?php echo $itemName?>','<?php echo $itemPrice ?>','<?php echo $useremail ?>','<?php echo $itemID ?>',)" class='w-full h-60 rounded-lg relative' style='background-image: linear-gradient(to top,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),url(<?php echo $itemImage?>); background-size: cover; background-repeat: no-repeat;'>
                   <div class='absolute top-4 right-6'>
-                    
+                    <i class='fa-solid fa-cart-plus text-4xl text-white hover:text-[#FFBF00] hover pointer'></i>
                   </div>
                   <div class='flex flex-col justify-start absolute bottom-4 left-6'>
-                    <h1 class='text-3xl font-bold text-white'><?php echo $productName?></h1>
+                    <h1 class='text-3xl font-bold text-white'><?php echo $itemName?></h1>
                     <div class='flex flex-row items-center'>
-                      <p class='text-white mr-4 flex items-center gap-2'><img class='w-4 h-4' src='../ICON/categories.png'><?php echo $productcategory ?></p>
-                      <p class='text-white flex items-center gap-2'><i class='fa-solid fa-dollar-sign'></i><?php echo $productPrice ?></p>
+                      <p class='text-white mr-4 flex items-center gap-2'><img class='w-4 h-4' src='../ICON/categories.png'><?php echo $itemType ?></p>
+                      <p class='text-white flex items-center gap-2'><i class="fa-solid fa-coins"></i><?php echo $itemPrice ?></p>
                     </div>
                   </div>
                 </div> 
@@ -110,18 +110,18 @@
                 ?>
                 <div class="hidden">
                   <form action="handleCart.php" method="post" id="addForm">
-                    <input type="text" name="productname">
-                    <input type="number" name="productprice">
+                    <input type="text" name="itemName">
+                    <input type="number" name="itemPrice">
                     <input type="text" name="useremail">
-                    <input type="text" name="productid">
+                    <input type="text" name="itemID">
                   </form>
                 </div>
                 <script>
-                  function handleForm(productName, productPrice, useremail, productid, ) {
-                    document.getElementById('addForm').elements['productname'].value = productName;
-                    document.getElementById('addForm').elements['productprice'].value = productPrice;
+                  function handleForm(itemName, itemPrice, useremail, itemID) {
+                    document.getElementById('addForm').elements['itemName'].value = itemName;
+                    document.getElementById('addForm').elements['itemPrice'].value = itemPrice;
                     document.getElementById('addForm').elements['useremail'].value = useremail;
-                    document.getElementById('addForm').elements['productid'].value = productid;
+                    document.getElementById('addForm').elements['itemID'].value = itemID;
                     document.getElementById('addForm').submit();
                   }
                 </script>

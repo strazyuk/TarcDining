@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--change the title to TarcDining-->
-    <title>Products</title>
+    <title>Home</title>
     <!-- design plugs -->
     <script src="https://kit.fontawesome.com/5f28ebb90a.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
@@ -23,47 +22,54 @@
       }
     </script>
 </head>
-<body>
+<body class="bg-yellowPrimary">
     <header>
-      <nav class="h-24 px-60 flex justify-between items-center">
+      <nav class="h-24 px-40 flex justify-between items-center">
         <div class="flex items-center">
           <img class="h-16 w-16" src="../ICON/logo.png" alt="">
           <h1 class="text-3xl font-bold ml-3">TarcDining</h1>
         </div>  
-        <div class="flex items-center">
-          <div class="flex items-center hover:text-redSecondary">
-            <i class="fa-solid fa-house fa-rotate-by mr-2"></i>
-            <a href="sellerHome.php" class="text-xl font-semibold uppercase">Home</a>
-          </div>
-          <div class="flex items-center ml-5 hover:text-redSecondary">
-            <i class="fa-solid fa-list mr-2"></i>
-            <a href="allItems.php" class="text-xl font-semibold uppercase">Items</a>
-          </div>
-          <div class="flex items-center ml-5 hover:text-redSecondary">
-            <!--change the icon to fa-list-check-->
-            <i class="fa-solid fa-plus mr-2"></i>
-            <!--change the text to ADD-->
-            <a href="Cart.php" class="text-xl font-semibold uppercase">ADD</a>
-          </div>
-        </div>
-        <div>
-          <?php
+        <?php
             if(isset($_COOKIE['username'])) {
                 $username = $_COOKIE['username'];
-                echo 
-                "<div class='flex items-center'>
-                  <i class='fa-solid fa-user mr-2 text-2xl'></i>
-                  <h1 class='text-xl font-semibold uppercase'>$username</h1>
-                 </div>";
             } else {
                 echo "No username cookie set";
             }
             ?>
+        <div>
+          <h1 class="text-2xl font-semibold uppercase">Welcome to admin dashboard, <?php echo $username ?></h1>
         </div>
       </nav>
     </header>
     <main>
-        <section class="px-[15rem]">
+      <section class="pl-40 pt-4 h-screen">
+        <div class="grid grid-cols-6">
+          <div class="mt-16">
+            <div class="flex flex-col items-start">
+              <div class="flex items-center hover:text-redSecondary mb-6">
+                <i class="fa-solid fa-chart-column mr-2 text-lg"></i>
+                <a href="adminHome.php" class="text-lg font-semibold uppercase">statistics</a>
+              </div>
+              <div class="flex items-center hover:text-redSecondary mb-6">
+                <i class="fa-regular fa-clipboard mr-2 text-lg"></i>
+                <a href="publishedItems.php" class="text-lg font-semibold uppercase">Published Items</a>
+              </div>
+              <div class="flex items-center hover:text-redSecondary">
+                <i class="fa-solid fa-plus mr-2"></i>
+                <a href='admin_create_account.php' class="text-lg font-semibold uppercase">Create Account</a>
+              </div>
+              <div class="flex items-center hover:text-redSecondary">
+                <i class="fa-solid fa-plus mr-2"></i>
+                <a href='admins.php' class="text-lg font-semibold uppercase">Users</a>
+              </div>
+              <div class="flex items-center hover:text-redSecondary">
+                <i class="fa-solid fa-plus mr-2"></i>
+                <a href='admin_feedback.php' class="text-lg font-semibold uppercase">Feedback</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-5 bg-white rounded-tl-3xl h-screen pl-12 pt-12">
+          <section class="px-[15rem]">
             <h1 class="text-center text-5xl font-extrabold my-10">
               <!--change the text -->
                 Fill up the form before you add an Item
@@ -100,37 +106,9 @@
                       <input type="text" name="itemName" class="w-full h-12 border-2 border-gray-300 rounded-lg px-4 my-4" required>
                   </div>
                   <div class="flex flex-row items-center flex-1">
-                                                                 <!--changed-->
-                      <h1 class="text-2xl font-semibold mr-4 w-72">Required Token:</h1>
-                      <input type="number" step="0.01" name="tokenCount" class="w-full h-12 border-2 border-gray-300 rounded-lg px-4 my-4" required>
+                    <h1 class="text-2xl font-semibold mr-4 w-72">Required Token:</h1>
+                    <input type="number" min="0" name="tokenCount" class="w-full h-12 border-2 border-gray-300 rounded-lg px-4 my-4" required>
                   </div>
-                </div>
-                
-                <!-- <div class="flex flex-row items-center">
-                  <h1 class="text-2xl font-semibold w-[21rem]">Item capacity:</h1>
-                  <input type="text" name="productAmount" class="w-full h-12 border-2 border-gray-300 rounded-lg px-4 my-4" required>
-                instruction
-                  <button class="" onclick="my_modal_1.showModal()"><i class="fa-solid fa-circle-exclamation text-4xl ml-4"></i></button>
-                  <dialog id="my_modal_1" class="modal">
-                      <div class="modal-box">
-                          <h3 class="font-bold text-lg">Here is the instruction on how you will set the amount for products:</h3>
-                          <p class="py-4">Firstly set the how you will measure the unit:</p>
-                          <div class="flex flex-col items-start py-4 gap-y-2">
-                              <p>wp - weight in pounds</p> -->
-                              <!-- <p>wk - weight in kilograms</p>
-                              <p>wg - weight in grams</p>
-                              <p>p - pieces</p>
-                              <p>ml - milliliters</p>
-                              <p>l - liters</p>
-                          </div>
-                          <p class="py-4">Then use a comma and set the able amount of the products with , like this- wp,1,2,0.5,5 </p>
-                          <p class="py-4">Here is an example: wp,1,2,3 . Means weight measurements type is pound and able ammount is 1 pound, 2 pound , 3 pound</p>
-                          <p class="py-4">Here is an example: p,4,10,20 . Means each package will contain 4 pieces, 10 pieces , 20 pieces</p>
-                          <div class="modal-action">
-                            <button class="btn" onclick="my_modal_1.close()">Close</button>
-                          </div>
-                      </div>
-                  </dialog> -->
                 </div>
                 <div class="flex flex-row items-center">
                     <h1 class="text-2xl font-semibold w-80">Product Image URl:</h1>
@@ -139,7 +117,9 @@
                 <input type="submit" value="submit" class="bg-yellow-300 py-3 w-full rounded-lg my-4">
               </form>
             </div>
-        </section>
+          </section>
+        </div>
+      </section>
     </main>
 </body>
 </html>

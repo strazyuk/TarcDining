@@ -64,11 +64,11 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         $username = $row['username']; 
         $email = $row['email'];
         setcookie('username', '', time() + 86400, "/"); // Expires in one day
-        setcookie('username', $username, time() + 86400, "/"); // Expires in one day
-        setcookie('email', '', time() + 86400, "/"); // Expires in one day
-        setcookie('email', $email, time() + 86400, "/"); // Expires in one day
-        setcookie('role', '', time() + 86400, "/"); // Expires in one day
-        setcookie('role', $role, time() + 86400, "/"); // Expires in one day
+        setcookie('username', $username, time() + 86400, "/"); 
+        setcookie('email', '', time() + 86400, "/"); 
+        setcookie('email', $email, time() + 86400, "/"); 
+        setcookie('role', '', time() + 86400, "/"); 
+        setcookie('role', $role, time() + 86400, "/"); 
         if ($role == 'student'){
             header("Location: studentHome.php");
             exit(); // Stop further execution
