@@ -43,6 +43,9 @@
       <div class="my-2">
         <h1>Don't have an account? <span class="text-redSecondary hover:text-blue-700 hover:underline"><a href="signup.php">Sign up now!</a></span></h1>
       </div>
+      <div class="flex items-center  hover:text-redSecondary">
+            <a href="admin_login.php" class="text-l font-semibold uppercase">Admin login</a>
+          </div>
       </div>
     </div>
     </div>

@@ -40,7 +40,7 @@
           </div>
           <div class="flex items-center ml-5 hover:text-redSecondary">
             <i class="fa-solid fa-list-check mr-2"></i>
-            <a class="text-xl font-semibold uppercase">ADD</a>
+            <a href="Cart.php" class= "text-xl font-semibold uppercase">CART</a>
           </div>
         </div>
         <div>
@@ -57,6 +57,9 @@
             }
             ?>
         </div>
+        <div class="flex items-center ml-5 hover:text-redSecondary">
+            <a href="login.php" class="text-xl font-semibold uppercase">LOGOUT</a>
+          </div>
       </nav>
     </header>
     <main>
@@ -74,7 +77,7 @@
           <?php
             require_once('DBconnect.php');
             $useremail = $_COOKIE['email'];
-            $query = "SELECT * FROM curMenu ORDER BY sellcount DESC LIMIT 6";
+            $query = "SELECT * FROM curMenu where status = 'published' ORDER BY sellcount DESC LIMIT 6";
             $result = mysqli_query($conn, $query);
             if (mysqli_num_rows($result) > 0) {
               while ($row = mysqli_fetch_array($result)) {

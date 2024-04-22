@@ -32,12 +32,9 @@
         <div class="flex items-center">
           <div class="flex items-center hover:text-redSecondary">
             <i class="fa-solid fa-house fa-rotate-by mr-2"></i>
-            <a href="customerHome.php" class="text-xl font-semibold uppercase">Home</a>
+            <a href="studentHome.php" class="text-xl font-semibold uppercase">Home</a>
           </div>
-          <div class="flex items-center ml-5 hover:text-redSecondary">
-            <i class="fa-solid fa-list mr-2"></i>
-            <a href="menu.php" class="text-xl font-semibold uppercase">Items</a>
-          </div>
+          
           <?php
            if(isset($_COOKIE['role'])) {
             $role = $_COOKIE['role'];
@@ -73,7 +70,7 @@
     <main>
         <section class="px-[15rem]">
             <h1 class="text-center text-7xl font-extrabold my-10">
-                Explore all the products
+                Explore all the items
             </h1>
             <div class="grid grid-cols-3 gap-6">         
               <?php

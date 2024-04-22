@@ -111,12 +111,15 @@
             <form action="handleRemoveCart.php" method="post" id="addForm">
                 <input type="text" name="useremail">
                 <input type="text" name="itemID">
+                <input type ="number" name ="totalCost">
             </form>
         </div>
         <script>
-            function handleForm(useremail, itemID) {
+            function handleForm(useremail, itemID ,totalCost) {
             document.getElementById('addForm').elements['itemID'].value = itemID;
             document.getElementById('addForm').elements['useremail'].value = useremail;
+            document.getElementById('addForm').elements['totalCost'].value = totalCost;
+
             document.getElementById('addForm').submit();
             }
         </script>
